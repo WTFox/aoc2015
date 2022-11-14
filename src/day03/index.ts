@@ -58,8 +58,8 @@ export function deliverPresentsWithSingleSanta(instructions: string): number {
   const locationLog = new Map<string, number>()
   const santa = new Santa(locationLog)
 
-  instructions.split("").map((val: string) => {
-    santa.deliverPresent(val)
+  instructions.split("").map((instruction: string) => {
+    santa.deliverPresent(instruction)
   })
 
   let sum = 0
@@ -75,11 +75,11 @@ export function deliverPresentsWithTwoSantas(instructions: string): number {
   const santa = new Santa(locationLog)
   const roboSanta = new Santa(locationLog)
 
-  instructions.split("").map((val: string, idx: number) => {
+  instructions.split("").map((instruction: string, idx: number) => {
     if (idx % 2 === 0) {
-      santa.deliverPresent(val)
+      santa.deliverPresent(instruction)
     } else {
-      roboSanta.deliverPresent(val)
+      roboSanta.deliverPresent(instruction)
     }
   })
 
