@@ -1,44 +1,69 @@
 import { readFileSync } from "fs"
 
-type Point = {
+type Location = {
   x: number
   y: number
 }
 
-function updatePointCounts(point: Point, pointsVisited: Map<string, number>) {
+function updatePointCounts(
+  point: Location,
+  pointsVisited: Map<string, number>
+) {
   let val = pointsVisited.get(JSON.stringify(point)) || 0
   pointsVisited.set(JSON.stringify(point), ++val)
 }
 
-export function deliverPresents(instructions: string): number {
-  const pointsVisited = new Map<string, number>()
-  let currentPosition: Point = { x: 0, y: 0 }
+class Santa {
+  public currentPosition: Location
+  public locationLog: Map<string, number>
 
-  updatePointCounts(currentPosition, pointsVisited)
+  constructor(locationLog: Map<string, number>) {
+    this.locationLog = locationLog
+    this.currentPosition = { x: 0, y: 0 }
+    updatePointCounts(this.currentPosition, this.locationLog)
+  }
 
-  instructions.split("").map((val) => {
-    switch (val) {
+  public deliverPresent(location: string) {
+    switch (location) {
       case "^":
-        currentPosition = { x: currentPosition.x, y: ++currentPosition.y }
-        updatePointCounts(currentPosition, pointsVisited)
+        this.currentPosition = {
+          x: this.currentPosition.x,
+          y: ++this.currentPosition.y,
+        }
         break
       case ">":
-        currentPosition = { x: ++currentPosition.x, y: currentPosition.y }
-        updatePointCounts(currentPosition, pointsVisited)
+        this.currentPosition = {
+          x: ++this.currentPosition.x,
+          y: this.currentPosition.y,
+        }
         break
       case "v":
-        currentPosition = { x: currentPosition.x, y: --currentPosition.y }
-        updatePointCounts(currentPosition, pointsVisited)
+        this.currentPosition = {
+          x: this.currentPosition.x,
+          y: --this.currentPosition.y,
+        }
         break
       case "<":
-        currentPosition = { x: --currentPosition.x, y: currentPosition.y }
-        updatePointCounts(currentPosition, pointsVisited)
+        this.currentPosition = {
+          x: --this.currentPosition.x,
+          y: this.currentPosition.y,
+        }
         break
     }
+    updatePointCounts(this.currentPosition, this.locationLog)
+  }
+}
+
+export function deliverPresents(instructions: string): number {
+  const locationLog = new Map<string, number>()
+  const santa = new Santa(locationLog)
+
+  instructions.split("").map((val) => {
+    santa.deliverPresent(val)
   })
 
   let sum = 0
-  for (const _ of pointsVisited.values()) {
+  for (const _ of locationLog.values()) {
     ++sum
   }
 
