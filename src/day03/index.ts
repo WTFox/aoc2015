@@ -54,12 +54,33 @@ class Santa {
   }
 }
 
-export function deliverPresents(instructions: string): number {
+export function deliverPresentsWithSingleSanta(instructions: string): number {
   const locationLog = new Map<string, number>()
   const santa = new Santa(locationLog)
 
-  instructions.split("").map((val) => {
+  instructions.split("").map((val: string) => {
     santa.deliverPresent(val)
+  })
+
+  let sum = 0
+  for (const _ of locationLog.values()) {
+    ++sum
+  }
+
+  return sum
+}
+
+export function deliverPresentsWithTwoSantas(instructions: string): number {
+  const locationLog = new Map<string, number>()
+  const santa = new Santa(locationLog)
+  const roboSanta = new Santa(locationLog)
+
+  instructions.split("").map((val: string, idx: number) => {
+    if (idx % 2 === 0) {
+      santa.deliverPresent(val)
+    } else {
+      roboSanta.deliverPresent(val)
+    }
   })
 
   let sum = 0
@@ -72,9 +93,13 @@ export function deliverPresents(instructions: string): number {
 
 export default {
   partOne: () => {
-    return deliverPresents(
+    return deliverPresentsWithSingleSanta(
       readFileSync("src/day03/input.txt").toString().trim()
     )
   },
-  partTwo: () => {},
+  partTwo: () => {
+    return deliverPresentsWithTwoSantas(
+      readFileSync("src/day03/input.txt").toString().trim()
+    )
+  },
 }
