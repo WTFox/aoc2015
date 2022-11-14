@@ -1,29 +1,28 @@
 {
-    "name": "aoc2015",
-    "version": "0.1.0",
-    "author": "wtfox",
-    "license": "LGPL-3.0",
-    "description": "TODO: write a description",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/wtfox/aoc2015"
-    },
-    "scripts": {
-        "build": "tsc",
-        "test": "jest --forceExit --coverage --verbose",
-        "tslint": "tslint -c tslint.json -p tsconfig.json",
-        "watch-test": "npm run test -- --watchAll",
-        "watch": "tsc -w"
-    },
-    "dependencies": {
-    },
-    "devDependencies": {
-        "@types/jest": "^24.0.15",
-        "@types/node": "^12.6.2",
-        "jest": "^24.8.0",
-        "ts-jest": "^24.0.2",
-        "ts-node": "^8.3.0",
-        "tslint": "^5.18.0",
-        "typescript": "^3.5.2"
-    }
+  "name": "aoc2015",
+  "version": "0.1.0",
+  "author": "wtfox",
+  "license": "LGPL-3.0",
+  "description": "Advent of Code (2015)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wtfox/aoc2015"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --coverage --verbose",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "watch-test": "npm run test -- --watchAll",
+    "watch": "tsc -w"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.6.2",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.2"
+  }
 }
