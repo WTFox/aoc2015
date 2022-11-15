@@ -5,13 +5,15 @@ type Location = {
   y: number
 }
 
-function updatePointCounts(
-  point: Location,
-  pointsVisited: Map<string, number>
+function updateLocationCounts(
+  location: Location,
+  locationsVisited: Map<string, number>
 ) {
-  let val = pointsVisited.get(JSON.stringify(point)) || 0
-  pointsVisited.set(JSON.stringify(point), ++val)
+  let val = locationsVisited.get(JSON.stringify(location)) || 0
+  locationsVisited.set(JSON.stringify(location), ++val)
 }
+
+type Direction = "^" | ">" | "v" | "<"
 
 class Santa {
   public currentPosition: Location
@@ -20,11 +22,11 @@ class Santa {
   constructor(locationLog: Map<string, number>) {
     this.locationLog = locationLog
     this.currentPosition = { x: 0, y: 0 }
-    updatePointCounts(this.currentPosition, this.locationLog)
+    updateLocationCounts(this.currentPosition, this.locationLog)
   }
 
-  public deliverPresent(location: string) {
-    switch (location) {
+  public deliverPresent(direction: Direction) {
+    switch (direction) {
       case "^":
         this.currentPosition = {
           x: this.currentPosition.x,
@@ -50,45 +52,34 @@ class Santa {
         }
         break
     }
-    updatePointCounts(this.currentPosition, this.locationLog)
+    updateLocationCounts(this.currentPosition, this.locationLog)
   }
 }
 
-export function deliverPresentsWithSingleSanta(instructions: string): number {
+export function deliverPresentsWithSingleSanta(directions: string): number {
   const locationLog = new Map<string, number>()
   const santa = new Santa(locationLog)
 
-  instructions.split("").map((instruction: string) => {
-    santa.deliverPresent(instruction)
+  directions.split("").forEach((direction: Direction) => {
+    santa.deliverPresent(direction)
   })
 
-  let sum = 0
-  for (const _ of locationLog.values()) {
-    ++sum
-  }
-
-  return sum
+  return Array.from(locationLog.keys()).length
 }
 
-export function deliverPresentsWithTwoSantas(instructions: string): number {
+export function deliverPresentsWithTwoSantas(directions: string): number {
   const locationLog = new Map<string, number>()
   const santa = new Santa(locationLog)
   const roboSanta = new Santa(locationLog)
 
-  instructions.split("").map((instruction: string, idx: number) => {
+  directions.split("").forEach((direction: Direction, idx: number) => {
     if (idx % 2 === 0) {
-      santa.deliverPresent(instruction)
+      santa.deliverPresent(direction)
     } else {
-      roboSanta.deliverPresent(instruction)
+      roboSanta.deliverPresent(direction)
     }
   })
-
-  let sum = 0
-  for (const _ of locationLog.values()) {
-    ++sum
-  }
-
-  return sum
+  return Array.from(locationLog.keys()).length
 }
 
 export default {
