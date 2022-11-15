@@ -1,6 +1,7 @@
 import day01 from "./day01"
 import day02 from "./day02"
 import day03 from "./day03"
+import day04 from "./day04"
 
 console.log("Day 1")
 console.log(" Part 1:", day01.partOne())
@@ -17,3 +18,9 @@ console.log("")
 console.log("Day 3")
 console.log(" Part 1:", day03.partOne())
 console.log(" Part 2:", day03.partTwo())
+
+console.log("")
+
+console.log("Day 4")
+console.log(" Part 1:", day04.partOne())
+console.log(" Part 2:", day04.partTwo())
