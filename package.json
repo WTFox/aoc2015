@@ -9,6 +9,7 @@
     "url": "https://github.com/wtfox/aoc2015"
   },
   "scripts": {
+    "answers": "npx ts-node src/index.ts",
     "build": "tsc",
     "test": "jest --coverage --verbose",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
