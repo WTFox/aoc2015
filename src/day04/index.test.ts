@@ -1,7 +1,4 @@
-import {
-  hexFromString,
-  findLowestPositiveNumberWhoseHashStartsWithFiveZeros,
-} from "."
+import { hexFromString, findLowestPositiveNumber } from "."
 
 describe("MD5s, Hexes, Oh my!", () => {
   test("convert string to md5 to hex", () => {
@@ -9,15 +6,11 @@ describe("MD5s, Hexes, Oh my!", () => {
     expect(hexFromString("pqrstuv1048970")).toMatch(/000006136ef.*$/)
   })
 
-  test("findLowestPositiveNumberWhoseHashStartsWithFiveZeros", () => {
-    expect(findLowestPositiveNumberWhoseHashStartsWithFiveZeros("abcdef")).toBe(
-      609043
-    )
+  test("findLowestPositi... secretKey: abcdef", () => {
+    expect(findLowestPositiveNumber("abcdef", /^00000/)).toBe(609043)
   })
 
-  test("findLowestPositiveNumberWhoseHashStartsWithFiveZeros", () => {
-    expect(
-      findLowestPositiveNumberWhoseHashStartsWithFiveZeros("pqrstuv")
-    ).toBe(1048970)
+  test("findLowestPositi... secretKey: pqrstuv", () => {
+    expect(findLowestPositiveNumber("pqrstuv", /^00000/)).toBe(1048970)
   })
 })

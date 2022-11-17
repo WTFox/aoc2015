@@ -4,11 +4,9 @@ export function hexFromString(input: string): string {
   return createHash("md5").update(Buffer.from(input)).digest("hex").toString()
 }
 
-export function findLowestPositiveNumberWhoseHashStartsWithFiveZeros(
-  secretKey: string
-) {
-  for (let index = 0; index < 10_000_000; ++index) {
-    if (hexFromString(`${secretKey}${index}`).startsWith("00000")) {
+export function findLowestPositiveNumber(secretKey: string, pattern: RegExp) {
+  for (let index = 0; index < 1_050_000; ++index) {
+    if (hexFromString(`${secretKey}${index}`).match(pattern)) {
       return index
     }
   }
@@ -17,7 +15,7 @@ export function findLowestPositiveNumberWhoseHashStartsWithFiveZeros(
 export default {
   partOne: () => {
     const secretKey = "yzbqklnj"
-    return findLowestPositiveNumberWhoseHashStartsWithFiveZeros(secretKey)
+    return [findLowestPositiveNumber(secretKey, /^00000/)]
   },
-  partTwo: () => {},
+  partTwo: () => { },
 }
