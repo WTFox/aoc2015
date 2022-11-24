@@ -2,10 +2,21 @@ import {
   stringContainsThreeVowels,
   stringContainsRepeatingCharacter,
   stringContainsOffensiveSubstring,
+  stringIsNiceOLD,
   stringIsNice,
 } from "."
 
 describe("stringIsNice", () => {
+  test("stringIsNiceNew", () => {
+    expect(stringIsNice("xxyxx")).toBe(true)
+    expect(stringIsNice("qjhvhtzxzqqjkmpb")).toBe(true)
+    expect(stringIsNice("aaa")).toBe(false)
+    expect(stringIsNice("uurcxstgmygtbstg")).toBe(false)
+    expect(stringIsNice("ieodomkazucvgmuy")).toBe(false)
+  })
+})
+
+describe("stringIsNiceOLD", () => {
   test("string contains three vowels", () => {
     expect(stringContainsThreeVowels("ugknbfddgicrmopn")).toBe(true)
     expect(stringContainsThreeVowels("bbb")).toBe(false)
@@ -19,10 +30,10 @@ describe("stringIsNice", () => {
     expect(stringContainsOffensiveSubstring("jchzalrnumimnmhp")).toBe(false)
   })
   test("stringIsNice", () => {
-    expect(stringIsNice("ugknbfddgicrmopn")).toBe(true)
-    expect(stringIsNice("aaa")).toBe(true)
-    expect(stringIsNice("jchzalrnumimnmhp")).toBe(false)
-    expect(stringIsNice("haegwjzuvuyypxyu")).toBe(false)
-    expect(stringIsNice("dvszwmarrgswjxmb")).toBe(false)
+    expect(stringIsNiceOLD("ugknbfddgicrmopn")).toBe(true)
+    expect(stringIsNiceOLD("aaa")).toBe(true)
+    expect(stringIsNiceOLD("jchzalrnumimnmhp")).toBe(false)
+    expect(stringIsNiceOLD("haegwjzuvuyypxyu")).toBe(false)
+    expect(stringIsNiceOLD("dvszwmarrgswjxmb")).toBe(false)
   })
 })

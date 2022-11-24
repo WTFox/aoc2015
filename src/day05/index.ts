@@ -43,7 +43,7 @@ export function stringContainsOffensiveSubstring(input: string): boolean {
   return false
 }
 
-export function stringIsNice(input: string): boolean {
+export function stringIsNiceOLD(input: string): boolean {
   return (
     stringContainsThreeVowels(input) &&
     stringContainsRepeatingCharacter(input) &&
@@ -51,8 +51,49 @@ export function stringIsNice(input: string): boolean {
   )
 }
 
+export function stringIsNice(input: string): boolean {
+  const characterArray = `${input} `.split("")
+  const seen = new Set<string>()
+  let hasPair = false
+  let hasCombo = false
+
+  for (let index = 0; index < characterArray.length - 2; ++index) {
+    const [one, two, three] = [
+      characterArray[index],
+      characterArray[index + 1],
+      characterArray[index + 2],
+    ]
+
+    if (one === two && two === three) {
+      continue
+    }
+
+    const pair = `${one}${two}`
+    if (seen.has(pair)) {
+      hasPair = true
+    }
+    if (one === three) {
+      hasCombo = true
+    }
+    seen.add(pair)
+  }
+  return hasPair && hasCombo
+}
+
 export default {
   partOne: () => {
+    let count = 0
+    readFileSync("src/day05/input.txt")
+      .toString()
+      .split("\n")
+      .forEach((val) => {
+        if (stringIsNiceOLD(val)) {
+          ++count
+        }
+      })
+    return count
+  },
+  partTwo: () => {
     let count = 0
     readFileSync("src/day05/input.txt")
       .toString()
@@ -63,8 +104,5 @@ export default {
         }
       })
     return count
-  },
-  partTwo: () => {
-    return
   },
 }
