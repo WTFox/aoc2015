@@ -1,5 +1,4 @@
 import { readFileSync } from "fs"
-import { parse } from "path"
 
 export class Light {
   public isOn: boolean
@@ -10,7 +9,7 @@ export class Light {
 
 export function buildGrid(size = 1000): Light[][] {
   return new Array<Light[]>(size).fill([]).map(() => {
-    return new Array<Light>(size).fill(null).map(() => new Light())
+    return new Array<Light>(size).fill(new Light()).map(() => new Light())
   })
 }
 
@@ -33,7 +32,6 @@ export function countLightsOn(grid: Light[][]): number {
   return sum
 }
 
-export function handleInstruction() {}
 
 export default {
   partOne: () => {

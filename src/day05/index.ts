@@ -3,7 +3,7 @@ import { readFileSync } from "fs"
 export function stringContainsThreeVowels(input: string): boolean {
   let sumOfVowels = 0
   const vowels = ["a", "e", "i", "o", "u"]
-  for (let val of input.split("")) {
+  for (const val of input.split("")) {
     if (vowels.includes(val)) {
       ++sumOfVowels
     }
@@ -16,7 +16,7 @@ export function stringContainsThreeVowels(input: string): boolean {
 
 export function stringContainsRepeatingCharacter(input: string): boolean {
   let lastCharacter = ""
-  for (let val of input.split("")) {
+  for (const val of input.split("")) {
     if (val === lastCharacter) {
       return true
     }
@@ -26,7 +26,7 @@ export function stringContainsRepeatingCharacter(input: string): boolean {
 }
 
 export function stringContainsOffensiveSubstring(input: string): boolean {
-  let lookup = new Map<string, string>([
+  const lookup = new Map<string, string>([
     ["b", "a"],
     ["d", "c"],
     ["q", "p"],
@@ -34,7 +34,7 @@ export function stringContainsOffensiveSubstring(input: string): boolean {
   ])
 
   let lastCharacter = ""
-  for (let val of input.split("")) {
+  for (const val of input.split("")) {
     if (lookup.has(val) && lookup.get(val) === lastCharacter) {
       return true
     }

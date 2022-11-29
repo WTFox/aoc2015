@@ -13,6 +13,9 @@ class Box {
 
   public static fromLine(line: string): Box {
     const [length, height, width] = line.trim().split("x")
+    if (!length || !height || !width) {
+      return new Box(0, 0, 0)
+    }
     return new Box(parseInt(length), parseInt(height), parseInt(width))
   }
 
@@ -23,9 +26,9 @@ class Box {
   public get ["squareFoot"](): number {
     return (
       2 *
-        (this.length * this.width +
-          this.width * this.height +
-          this.height * this.length) +
+      (this.length * this.width +
+        this.width * this.height +
+        this.height * this.length) +
       Object.values(this)
         .sort((a, b) => a - b)
         .splice(0, 2)
@@ -53,7 +56,10 @@ export default {
       .split("\n")
 
     return inputData.reduce((acc, line) => {
-      return acc + Box.fromLine(line).squareFoot
+      if (typeof line !== "undefined") {
+        return acc + Box.fromLine(line).squareFoot
+      }
+      return 0
     }, 0)
   },
   partTwo: () => {

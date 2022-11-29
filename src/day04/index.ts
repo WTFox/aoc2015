@@ -10,6 +10,7 @@ export function findLowestPositiveNumber(secretKey: string, pattern: RegExp) {
       return index
     }
   }
+  return -1
 }
 
 export default {

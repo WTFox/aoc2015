@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { buildGrid, countLightsOn, Light } from "."
 
 describe("Day 6", () => {
